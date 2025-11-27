@@ -8,7 +8,7 @@ from src.consumer import Consumer
 
 class TestBoundedBlockingQueue(unittest.TestCase):
     """Unit tests for the BoundedBlockingQueue class."""
-
+    #proves basic put/get functionality works
     def test_put_and_get_single_item(self) -> None:
         queue: BoundedBlockingQueue[int] = BoundedBlockingQueue(capacity=2)
 
@@ -18,7 +18,7 @@ class TestBoundedBlockingQueue(unittest.TestCase):
         item = queue.get()
         self.assertEqual(item, 10)
         self.assertEqual(queue.size(), 0)
-
+    #proves the queue maintains correct ordering
     def test_fifo_order(self) -> None:
         """Queue should preserve FIFO ordering."""
         queue: BoundedBlockingQueue[int] = BoundedBlockingQueue(capacity=5)
@@ -29,7 +29,7 @@ class TestBoundedBlockingQueue(unittest.TestCase):
 
         result = [queue.get() for _ in data]
         self.assertEqual(result, data)
-
+    #proves shutdown behavior is correct and consumers will exit
     def test_close_empty_queue_raises_on_get(self) -> None:
         """Getting from a closed and empty queue should raise QueueClosedError."""
         queue: BoundedBlockingQueue[int] = BoundedBlockingQueue(capacity=1)
@@ -37,7 +37,7 @@ class TestBoundedBlockingQueue(unittest.TestCase):
 
         with self.assertRaises(QueueClosedError):
             _ = queue.get()
-
+    #prevents producers from adding items after shutdown
     def test_cannot_put_after_close(self) -> None:
         """Putting into a closed queue should raise RuntimeError."""
         queue: BoundedBlockingQueue[int] = BoundedBlockingQueue(capacity=1)
@@ -49,7 +49,7 @@ class TestBoundedBlockingQueue(unittest.TestCase):
 
 class TestProducerConsumerIntegration(unittest.TestCase):
     """Integration tests for Producer and Consumer using the queue."""
-
+    #proves full producer-consumer pipeline works with a single consumer
     def test_all_items_transferred_single_consumer(self) -> None:
         """All items from source must appear in destination in same order."""
         source: List[int] = list(range(20))
@@ -72,7 +72,7 @@ class TestProducerConsumerIntegration(unittest.TestCase):
 
         # Destination should have exactly the source data in order
         self.assertEqual(destination, source)
-
+    #proves queue is thread safe with multiple consumers
     def test_multiple_consumers_share_work(self) -> None:
         """
         When using multiple consumers, all items from source should still be
