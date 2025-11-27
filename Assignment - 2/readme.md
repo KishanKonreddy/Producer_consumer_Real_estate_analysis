@@ -11,6 +11,24 @@ It analyzes the **Real Estate Sales 2001–2023** dataset published by the State
 
 ---
 
+## ⚠️ Important Note About Dataset
+
+**GitHub File Size Limitation:** Due to GitHub's 100MB file size limit, the full dataset (`Real_Estate_Sales_2001-2023_GL.csv`) cannot be directly included in this repository as it exceeds this limit.
+
+**To run this project, you have two options:**
+
+1. **Download from the included ZIP file:**
+   - Extract `Real_Estate_Sales_2001-2023_GL.zip` (included in the repository)
+   - Place the extracted CSV file in the `data/` folder
+
+2. **Download directly from the official source:**
+   - Visit: [Connecticut Real Estate Sales - Data.gov](https://catalog.data.gov/dataset/real-estate-sales-2001-2018/resource/f7cb94d8-283c-476f-a966-cc8c9e1308b4)
+   - Download the dataset and save it as `data/Real_Estate_Sales_2001-2023_GL.csv`
+
+**Expected file location:** `ASSIGNMENT-2/data/Real_Estate_Sales_2001-2023_GL.csv`
+
+---
+
 ## 1. Problem Statement
 
 The Connecticut Real Estate Sales dataset contains more than a million rows of property transactions recorded by towns across the state. In its raw CSV form, the data is not directly useful for decision-making. Stakeholders typically want to answer questions like:
@@ -119,7 +137,7 @@ These assumptions are both **implemented in the code** and **documented here**, 
 
 ## 3. Project Structure
 ```
-ASSIGNMENT - 2/
+ASSIGNMENT-2/
 ├── src/
 │   ├── __init__.py
 │   ├── loader.py                      # CSV parsing and cleaning into record dictionaries
@@ -131,11 +149,11 @@ ASSIGNMENT - 2/
 │   └── test_real_estate_small_unit.py # Small unit tests over handcrafted records
 ├── Dataset_Choices_and_Assumptions.docx # Separate written documentation
 ├── data/
-│   └── Real_Estate_Sales_2001-2023_GL.csv # Connecticut real estate sales CSV
+│   ├── Real_Estate_Sales_2001-2023_GL.zip  # Compressed dataset (extract before use)
+│   └── Real_Estate_Sales_2001-2023_GL.csv                            
 ├── images/                            # Output screenshots
 │   ├── Real_Estate_Analysis-1.png
-│   ├── Real_Estate_Analysis-2.png
-│
+│   └── Real_Estate_Analysis-2.png
 └── README.md
 ```
 
@@ -243,23 +261,29 @@ Command-line interface that orchestrates the analysis:
 ### 4.1 Prerequisites
 
 - Python **3.8+** (uses standard library only, no external dependencies)
-- Download the dataset from [Data.gov](https://catalog.data.gov/dataset/real-estate-sales-2001-2018/resource/f7cb94d8-283c-476f-a966-cc8c9e1308b4) and place it as `data/Real_Estate_Sales_2001-2023_GL.csv` in the `data/` folder.
+- **Extract the dataset:**
+  - Option 1: Extract `Real_Estate_Sales_2001-2023_GL.zip` from the `data/` folder
+  - Option 2: Download directly from [Data.gov](https://catalog.data.gov/dataset/real-estate-sales-2001-2018/resource/f7cb94d8-283c-476f-a966-cc8c9e1308b4)
+- Place the extracted CSV as `data/Real_Estate_Sales_2001-2023_GL.csv`
 
 ---
 
 ### 4.2 Setup
 
-From the project root (`ASSIGNMENT - 2`):
+From the project root (`ASSIGNMENT-2`):
 ```bash
 git clone <your-github-repo-url>.git
 cd ASSIGNMENT-2
+
+# Extract the dataset (if using the included ZIP)
+unzip data/Real_Estate_Sales_2001-2023_GL.zip -d data/
 
 # Optional: Create virtual environment
 python3 -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
 
-**Note:** This project uses only the Python standard library, so no `requirements.txt` or package installation is needed.
+**Note:** This project uses only the Python standard library, so no package installation is needed.
 
 ---
 
@@ -336,7 +360,6 @@ These tests ensure that the functional building blocks behave as expected before
 
 ![Real Estate Analysis 2](images/Real_Estate_Analysis-2.png)
 
-
 The CLI prints each query in a clearly separated block. A typical excerpt looks like:
 ```
 ================================================================================
@@ -374,8 +397,8 @@ This combination of CLI output and unit tests demonstrates how functional progra
 **Source:** [Data.gov - Connecticut Open Data Portal](https://catalog.data.gov/dataset/real-estate-sales-2001-2018/resource/f7cb94d8-283c-476f-a966-cc8c9e1308b4)  
 **License:** Public Domain
 
+---
 
-
-## 9. Contributing
+## 8. Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
