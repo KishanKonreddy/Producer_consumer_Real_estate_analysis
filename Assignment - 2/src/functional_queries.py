@@ -306,7 +306,7 @@ def price_distribution(records: List[Dict[str, Any]], year: int) -> List[Dict[st
             "p25": p25,
             "median": p50,
             "p75": p75,
-            "iqr": p75 - p25
+            "iqr": p75 - p25 #Inter Quartile range
         })
 
     return sorted(result, key=lambda x: x["median"], reverse=True)
